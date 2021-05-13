@@ -29,7 +29,7 @@ class Play extends Phaser.Scene {
         player.body.allowRotation = false;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
             game.input.activePointer.y, 60, 500);
-
+            
     }
 
 
