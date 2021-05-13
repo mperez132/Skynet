@@ -21,8 +21,8 @@ class Menu extends Phaser.Scene {
         }
 
 
-        this.add.text(game.config.width / 2, game.config.height / 4, 'SKYNET', menuConfig).setOrigin(0,0);
-        this.add.text(game.config.width / 2.4, game.config.height / 2, 'Press UP to play demo', menuConfig).setOrigin(0,0);
+        this.add.text(game.config.width / 2.2, game.config.height / 4, 'SKYNET', menuConfig).setOrigin(0,0);
+        this.add.text(game.config.width / 2.7, game.config.height / 2, 'Press UP to play demo', menuConfig).setOrigin(0,0);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     
