@@ -1,2 +1,2 @@
-# Sky-net
+# Sky-Net
  CMPM-120 Final game
