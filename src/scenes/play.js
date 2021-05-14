@@ -4,10 +4,13 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        //var rt is a render texture for the trail the player can make on left click.
         var rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+        //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
-
+        //Creation of the player ship with physics
+        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'playerShip1');
         // menu text configuration
         let playConfig = {
             fontFamily: 'Courier',
@@ -21,9 +24,9 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        //Adding text to the playConfig
         this.add.text(game.config.width / 2.5, game.config.height / 5, 'Move cursor around', playConfig).setOrigin(0,0);
-
-        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'playerShip1');
+        //Checking whether the pointer is down
         rt.on('pointerdown', function (pointer) {
 
             this.draw('trail', player.x, player.y, 1);
@@ -39,7 +42,7 @@ class Play extends Phaser.Scene {
     
         });
     }
-
+    //Allowing the player to follow the mouse cursor 
     update() {
         player.body.allowRotation = false;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 

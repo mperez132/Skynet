@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
-
+        //Add text to the menu Config
         this.add.text(game.config.width / 2.1, game.config.height / 4, 'SKYNET', menuConfig).setOrigin(0,0);
         this.add.text(game.config.width / 2.6, game.config.height / 2, 'Press UP to play demo', menuConfig).setOrigin(0,0);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -28,10 +28,9 @@ class Menu extends Phaser.Scene {
     }
     
     update() {
+        //On pressing up, the scene changes to playScene
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.scene.start('playScene')
-
-
         }
     }
     
