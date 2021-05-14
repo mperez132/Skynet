@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
         //Creation of the player ship with physics
-        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'playerShip1');
+        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
         // menu text configuration
         let playConfig = {
             fontFamily: 'Courier',
