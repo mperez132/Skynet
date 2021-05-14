@@ -25,7 +25,9 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         }
         //Adding text to the playConfig
-        this.add.text(game.config.width / 2.5, game.config.height / 5, 'Move cursor around', playConfig).setOrigin(0,0);
+        this.add.text(game.config.width / 4, game.config.height / 5, 'Move cursor and press LMB to create a trail', playConfig).setOrigin(0,0);
+        //Adding text to the playConfig
+        this.add.text(game.config.width / 2.5, game.config.height / 3, 'Press UP to reset', playConfig).setOrigin(0,0);
         //Checking whether the pointer is down
         rt.on('pointerdown', function (pointer) {
 
@@ -41,12 +43,17 @@ class Play extends Phaser.Scene {
             }
     
         });
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     //Allowing the player to follow the mouse cursor 
     update() {
         player.body.allowRotation = false;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
             game.input.activePointer.y, 60, 500);
+
+        if(Phaser.Input.Keyboard.JustDown(keyUP)) {
+            this.scene.start('menuScene')
+        }
 
     }
 
