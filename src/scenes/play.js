@@ -29,14 +29,14 @@ class Play extends Phaser.Scene {
         //Checking whether the pointer is down
         rt.on('pointerdown', function (pointer) {
 
-            this.draw('trail', player.x, player.y, 1);
+            this.draw('shipTrail', player.x, player.y, 1);
             console.log('drawing');
         });
         rt.on('pointermove', function (pointer) {
 
             if (pointer.isDown)
             {
-                this.draw('trail', player.x, player.y , 1);
+                this.draw('shipTrail', player.x, player.y , 1);
                 console.log('drawing2');
             }
     
