@@ -10,6 +10,7 @@ class Load extends Phaser.Scene {
 
         //loading sound
         this.load.audio('musicBackground','./assets/Backfill.mp3')
+        this.load.audio('musicStart','./assets/Start_Tone.mp3')
     }
 
 

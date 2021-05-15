@@ -7,6 +7,8 @@ class Menu extends Phaser.Scene {
             'Background').setOrigin(0,0);
 
         music = this.sound.add('musicBackground');
+        startButton = this.sound.add('musicStart');
+        startButton.volume = 0.01;
         music.volume = 0.05;
         music.loop = true;
         music.play();
@@ -36,6 +38,7 @@ class Menu extends Phaser.Scene {
         this.backgroundSpace.tilePositionX -= 1.5;
         //On pressing up, the scene changes to playScene
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
+            startButton.play();
             this.scene.start('playScene')
         }
     }

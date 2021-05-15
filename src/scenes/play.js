@@ -4,6 +4,9 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+
+        startButton.volume = 0.01;
+ 
         //var rt is a render texture for the trail the player can make on left click.
         var rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
         //tileSprite temporary background
@@ -54,11 +57,9 @@ class Play extends Phaser.Scene {
             game.input.activePointer.y, 60, 500);
 
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
+            startButton.play();
             music.stop();
             this.scene.start('menuScene')
         }
-
     }
-
-
 }

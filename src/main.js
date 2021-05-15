@@ -20,6 +20,7 @@ let config = {
     scene: [Load, Menu, Play],
 }
 let music
+let startButton
 let game = new Phaser.Game(config);
 var player
 
