@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
+        this.backgroundSpace.tilePositionX -= 1;
         //Creation of the player ship with physics
         player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
         // menu text configuration
@@ -47,11 +48,13 @@ class Play extends Phaser.Scene {
     }
     //Allowing the player to follow the mouse cursor 
     update() {
+        this.backgroundSpace.tilePositionX -= 1.5;
         player.body.allowRotation = false;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
             game.input.activePointer.y, 60, 500);
 
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
+            music.stop();
             this.scene.start('menuScene')
         }
 

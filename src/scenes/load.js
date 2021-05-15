@@ -7,6 +7,9 @@ class Load extends Phaser.Scene {
         this.load.image('ShipPlayer', './assets/playerShip1.png');
         this.load.image('Background', './assets/tempbackground.png');
         this.load.image('shipTrail', './assets/trail.png');
+
+        //loading sound
+        this.load.audio('musicBackground','./assets/Backfill.mp3')
     }
 
 

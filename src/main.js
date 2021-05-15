@@ -19,7 +19,7 @@ let config = {
     },
     scene: [Load, Menu, Play],
 }
-
+let music
 let game = new Phaser.Game(config);
 var player
 

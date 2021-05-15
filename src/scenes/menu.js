@@ -6,6 +6,11 @@ class Menu extends Phaser.Scene {
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
 
+        music = this.sound.add('musicBackground');
+        music.volume = 0.05;
+        music.loop = true;
+        music.play();
+
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
@@ -28,6 +33,7 @@ class Menu extends Phaser.Scene {
     }
     
     update() {
+        this.backgroundSpace.tilePositionX -= 1.5;
         //On pressing up, the scene changes to playScene
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.scene.start('playScene')
