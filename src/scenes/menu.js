@@ -35,7 +35,7 @@ class Menu extends Phaser.Scene {
     }
     
     update() {
-        this.backgroundSpace.tilePositionX -= 1.5;
+        this.backgroundSpace.tilePositionY -= 1.5;
         //On pressing up, the scene changes to playScene
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
