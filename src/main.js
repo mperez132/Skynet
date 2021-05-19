@@ -1,8 +1,8 @@
 let config = {
 
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     width: 1440,
-    height: 720,
+    height: 960,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -14,7 +14,6 @@ let config = {
                 x: 0,
                 y: 0
             },
-            fps: 60
         }
     },
     scene: [Load, Menu, Play],
@@ -23,6 +22,7 @@ let music
 let startButton
 let game = new Phaser.Game(config);
 var player
+var rt
 
 let keyLEFT, keyRIGHT, keyR, keyUP, keyDOWN;
 

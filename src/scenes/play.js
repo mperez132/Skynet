@@ -6,9 +6,9 @@ class Play extends Phaser.Scene {
     create() {
 
         startButton.volume = 0.01;
- 
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         //var rt is a render texture for the trail the player can make on left click.
-        var rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+        rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
         //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
@@ -31,34 +31,28 @@ class Play extends Phaser.Scene {
         this.add.text(game.config.width / 4, game.config.height / 5, 'Move cursor and press LMB to create a trail', playConfig).setOrigin(0,0);
         //Adding text to the playConfig
         this.add.text(game.config.width / 2.5, game.config.height / 3, 'Press UP to reset', playConfig).setOrigin(0,0);
-        //Checking whether the pointer is down
-        rt.on('pointerdown', function (pointer) {
-
-            this.draw('shipTrail', player.x, player.y, 1);
-            console.log('drawing');
-        });
-        rt.on('pointermove', function (pointer) {
-
-            if (pointer.isDown)
-            {
-                this.draw('shipTrail', player.x, player.y , 1);
-                console.log('drawing2');
-            }
-    
-        });
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     //Allowing the player to follow the mouse cursor 
     update() {
         this.backgroundSpace.tilePositionY -= 1.5;
         player.body.allowRotation = false;
+        var pointer = this.input.activePointer;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
             game.input.activePointer.y, 60, 500);
 
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
             music.stop();
-            this.scene.start('menuScene')
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                this.scene.start('menuScene');
+            })
         }
+        if(pointer.isDown){
+            console.log('down2');
+            rt.draw('shipTrail', player.x, player.y , 1);
+        }
+
     }
 }

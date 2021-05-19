@@ -3,6 +3,7 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
     create(){
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
 
@@ -39,7 +40,10 @@ class Menu extends Phaser.Scene {
         //On pressing up, the scene changes to playScene
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
-            this.scene.start('playScene')
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                this.scene.start('playScene');
+            })
         }
     }
     
