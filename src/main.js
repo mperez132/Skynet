@@ -1,3 +1,6 @@
+
+"use strict";
+
 let config = {
 
     type: Phaser.CANVAS,
@@ -16,11 +19,16 @@ let config = {
             },
         }
     },
-    scene: [Load, Menu, Play],
+    scene: [Load, Menu, Play, Talking],
 }
+let game = new Phaser.Game(config);
+const centerX = game.config.width / 2;
+const centerY = game.config.height / 2;
+let keySPACE = null;
+let intro = true;
 let music
 let startButton
-let game = new Phaser.Game(config);
+let ending = false;
 var player
 var rt
 
