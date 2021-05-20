@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene {
         music.loop = true;
         music.play();
         this.add.bitmapText(centerX, centerY - 32, 'gem_font', 'SKY NET', 75).setOrigin(0.5);
-        this.add.bitmapText(centerX, centerY + 50, 'gem_font', 'Press UP to play demo', 50).setOrigin(0.5);
+        this.add.bitmapText(centerX, centerY + 50, 'gem_font', 'Press UP to Start Game', 50).setOrigin(0.5);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     

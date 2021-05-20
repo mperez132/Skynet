@@ -7,28 +7,28 @@
 		},
 		{
 			"speaker" : "janitor",
-			"dialog" : "At least it's beautiful among the stars. The view looking down on Earth is breathtaking."
+			"dialog" : "At least the view is beautiful. The Earth looks completely different from the pictures."
 		}
 	],
 	[
 		{	
 			"speaker" : "boss",
-			"dialog" : "JANITOR 5 - 0 do you copy?",
+			"dialog" : "JANITOR 5-0 do you copy?",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "janitor",
-			"dialog" : "This is JANITOR 5 - 0 with Earth's SKY NET. I copy!",
+			"dialog" : "This is JANITOR 5-0 with Earth's SKY NET. I copy!",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "You have multiple bogeys inbound with a collision course set for Los Angeles. Start up your engines!",
+			"dialog" : "You have multiple bogeys inbound with collision courses set for targets across California. You're the only Janitor in the area. You have the green light to intercept!",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "janitor",
-			"dialog" : "Tell me something I don't know. JANITOR 5 - 0 on course to intercept, over.",
+			"dialog" : "This is JANITOR 5-0 on new heading 147. On course to intercept. ETA 2 minutes, over.",
 			"newSpeaker" : "true"
 		}
 	]

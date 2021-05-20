@@ -14,7 +14,7 @@ class Talking extends Phaser.Scene {
         this.NEXT_X = 1400;
         this.NEXT_Y = 750;
 
-        this.LETTER_TIMER = 30;
+        this.LETTER_TIMER = 40;
 
         this.dialogConvo = 0;			
         this.dialogLine = 0;			
@@ -26,7 +26,7 @@ class Talking extends Phaser.Scene {
 
         this.janitor = null;
         this.boss = null;
-        this.tweenDuration = 500;
+        this.tweenDuration = 300;
 
         this.OFFSCREEN_X = -1440;
         this.OFFSCREEN_Y = 1000;
@@ -44,8 +44,8 @@ class Talking extends Phaser.Scene {
         this.dialogText = this.add.bitmapText(this.TEXT_X, this.TEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
-        this.janitor = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+15, 'homer1').setOrigin(0, 1);
-        this.boss = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+15, 'jove1').setOrigin(0, 1);
+        this.janitor = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+24, 'playerModel').setOrigin(0, 1);
+        this.boss = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+24, 'bossModel').setOrigin(0, 1);
         keySPACE = this.input.keyboard.createCursorKeys();
         this.textStart();
     }
