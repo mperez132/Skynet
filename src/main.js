@@ -19,7 +19,7 @@ let config = {
             },
         }
     },
-    scene: [Load, Menu, Play, Talking],
+    scene: [Load, Menu, Talking, Play],
 }
 let game = new Phaser.Game(config);
 const centerX = game.config.width / 2;
