@@ -26,11 +26,15 @@ const centerX = game.config.width / 2;
 const centerY = game.config.height / 2;
 let keySPACE = null;
 let intro = true;
-let music
-let startButton
+let music;
+let startButton;
 let ending = false;
-var player
-var rt
+var player;
+var rt;
+var pt;
+var particles;
+
+
 
 let keyLEFT, keyRIGHT, keyR, keyUP, keyDOWN;
 

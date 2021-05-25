@@ -16,6 +16,7 @@ class Menu extends Phaser.Scene {
         this.add.bitmapText(centerX, centerY - 32, 'gem_font', 'SKY NET', 75).setOrigin(0.5);
         this.add.bitmapText(centerX, centerY + 50, 'gem_font', 'Press UP to Start Game', 50).setOrigin(0.5);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     }
     
     update() {
@@ -29,6 +30,13 @@ class Menu extends Phaser.Scene {
                     this.scene.start('playScene');
                 })
             }
+            if(Phaser.Input.Keyboard.JustDown(keyDOWN)) {
+                startButton.play();
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('playScene');
+                })
+            }
         }
         else if(intro){
             if(Phaser.Input.Keyboard.JustDown(keyUP)) {
@@ -36,6 +44,13 @@ class Menu extends Phaser.Scene {
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
                 this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
                     this.scene.start('talkingScene');
+                })
+            }
+            if(Phaser.Input.Keyboard.JustDown(keyDOWN)) {
+                startButton.play();
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('playScene');
                 })
             }
          }

@@ -8,6 +8,7 @@ class Load extends Phaser.Scene {
         this.load.image('Background', './assets/tempbackground.png');
         this.load.image('shipTrail', './assets/trail.png');
         this.load.image('smolAsteroids', './assets/smallAsteroid.png');
+        this.load.image('playerUI', './assets/playerHud.png');
 
         //Loading Dialog assets
         this.load.json('dialog', './assets/json/dialog.json');
@@ -15,6 +16,9 @@ class Load extends Phaser.Scene {
         this.load.image ('playerModel', './assets/img/PlayerFace.png');
         this.load.image ('bossModel', './assets/img/BossFace.png');
         this.load.bitmapFont('gem_font', './assets/font/gem.png', './assets/font/gem.xml');
+
+        //Loading particle assets
+        this.load.atlas('flare', 'assets/flares.png', 'assets/json/flares.json');
 
         //loading sound
         this.load.audio('musicBackground','./assets/Backfill.mp3')

@@ -9,9 +9,12 @@ class Play extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         //var rt is a render texture for the trail the player can make on left click.
         rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+        pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
         //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
+        this.pUI = this.add.tileSprite(0,0, game.config.width, game.config.height,
+            'playerUI').setOrigin(0,0);
         //Creation of the player ship with physics
         player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
         // menu text configuration
@@ -27,19 +30,35 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        //Adding text to the playConfig
-        this.add.text(game.config.width / 4, game.config.height / 5, 'Move cursor and press LMB to create a trail', playConfig).setOrigin(0,0);
-        //Adding text to the playConfig
-        this.add.text(game.config.width / 2.5, game.config.height / 3, 'Press UP to reset', playConfig).setOrigin(0,0);
+        particles = this.add.particles('flare');
+
+        particles.createEmitter({
+            frame: 'blue',
+            speed: { min: 1, max: 1 },
+            angle: 0,
+            gravityY: 100,
+            gravityX: 100,
+            scale: { start: 0.1, end: 0 },
+            quantity: 2,
+            blendMode: 'ADD'
+        });
+
+        particles.setVisible(false);
+
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     //Allowing the player to follow the mouse cursor 
     update() {
+        pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
         player.body.allowRotation = false;
+        player.setCollideWorldBounds(true);
+        player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
         var pointer = this.input.activePointer;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
             game.input.activePointer.y, 60, 500);
+
+        //pt.draw(particles, player.x , player.y, 1);
 
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
@@ -53,6 +72,7 @@ class Play extends Phaser.Scene {
         if(pointer.isDown){
             console.log('down2');
             rt.draw('shipTrail', player.x, player.y , 1);
+            //pt.draw(particles, player.x, player.y, 1);
         }
 
     }
