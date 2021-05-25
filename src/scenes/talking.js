@@ -37,7 +37,11 @@ class Talking extends Phaser.Scene {
         //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
-
+        this.backgroundSpace2 = this.add.tileSprite(0,0, game.config.width, game.config.height - 20,
+            'Background2').setOrigin(0,0);
+        this.backgroundSpace2.setAlpha(0.5);
+        player = this.physics.add.sprite(game.config.width /2, game.config.height /3 , 'ShipPlayer');
+        player.angle = -90;
         this.dialog = this.cache.json.get('dialog');
         this.dialogbox = this.add.sprite(0,0, 'boxDialog').setOrigin(0);
         // initialize dialog text objects (with no text)
@@ -52,6 +56,7 @@ class Talking extends Phaser.Scene {
 
     update() {
         this.backgroundSpace.tilePositionY -= 1.5;
+        this.backgroundSpace2.tilePositionY -= 0.6;
         if(Phaser.Input.Keyboard.JustDown(keySPACE.space) && !this.dialogTyping) {
             this.textStart();
         }

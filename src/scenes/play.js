@@ -13,6 +13,9 @@ class Play extends Phaser.Scene {
         //tileSprite temporary background
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
+        this.backgroundSpace2 = this.add.tileSprite(0,0, game.config.width, game.config.height - 20,
+            'Background2').setOrigin(0,0);
+            this.backgroundSpace2.setAlpha(0.5);
         this.pUI = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'playerUI').setOrigin(0,0);
         //Creation of the player ship with physics
@@ -51,6 +54,7 @@ class Play extends Phaser.Scene {
     update() {
         pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
+        this.backgroundSpace2.tilePositionY -= 0.6;
         player.body.allowRotation = false;
         player.setCollideWorldBounds(true);
         player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));

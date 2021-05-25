@@ -6,6 +6,7 @@ class Load extends Phaser.Scene {
         //Loading assets
         this.load.image('ShipPlayer', './assets/janitorship.png');
         this.load.image('Background', './assets/tempbackground.png');
+        this.load.image('Background2', './assets/tempbackground2.png');
         this.load.image('shipTrail', './assets/trail.png');
         this.load.image('smolAsteroids', './assets/smallAsteroid.png');
         this.load.image('playerUI', './assets/playerHud.png');
