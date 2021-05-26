@@ -60,7 +60,7 @@ class Play extends Phaser.Scene {
         player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
         var pointer = this.input.activePointer;
         player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
-            game.input.activePointer.y, 60, 500);
+            game.input.activePointer.y, 60, 1500);
 
         //pt.draw(particles, player.x , player.y, 1);
 
