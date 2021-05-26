@@ -10,16 +10,24 @@ class Play extends Phaser.Scene {
         //var rt is a render texture for the trail the player can make on left click.
         rt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
         pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
-        //tileSprite temporary background
+        //tileSprite backgrounds
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
         this.backgroundSpace2 = this.add.tileSprite(0,0, game.config.width, game.config.height - 20,
             'Background2').setOrigin(0,0);
             this.backgroundSpace2.setAlpha(0.5);
+         //Creation of the player ship with physics and the first asteroid. 
+        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
+        this.debris01 = new Debris(this, Phaser.Math.Between(0, this.game.config.width), -100, 'bicAsteroid');
+
+        this.clock = this.time.delayedCall(3000, () => {
+        this.comet01 = new Debris(this, Phaser.Math.Between(0, this.game.config.width), -100, 'cometDebris');
+        }, null, this); 
+
         this.pUI = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'playerUI').setOrigin(0,0);
-        //Creation of the player ship with physics
-        player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
+        this.pUI.depth = 100;
+
         // menu text configuration
         let playConfig = {
             fontFamily: 'Courier',
@@ -51,7 +59,7 @@ class Play extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     }
     //Allowing the player to follow the mouse cursor 
-    update() {
+    update(time, delta) {
         pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
         this.backgroundSpace2.tilePositionY -= 0.6;
@@ -63,7 +71,8 @@ class Play extends Phaser.Scene {
             game.input.activePointer.y, 60, 1500);
 
         //pt.draw(particles, player.x , player.y, 1);
-
+        //this.comet01.update();
+        //checkDebris();
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
             music.stop();
@@ -78,6 +87,18 @@ class Play extends Phaser.Scene {
             rt.draw('shipTrail', player.x, player.y , 1);
             //pt.draw(particles, player.x, player.y, 1);
         }
+        this.debris01.update();
+        this.debris01.angle += 0.3
+        this.checkDebris();
+    }
 
+    checkDebris() {
+        if(this.debris01.y >= game.config.height + 50) {
+            this.spawn = Phaser.Math.Between(0, this.game.config.width);
+            this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
+            //console.log(this.texturePicker);
+            this.debris01.destroy();
+            this.debris01 = new Debris(this, this.spawn, -100, 'bicAsteroid');
+        }
     }
 }
