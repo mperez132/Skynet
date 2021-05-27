@@ -7,9 +7,11 @@ class Load extends Phaser.Scene {
         this.load.image('ShipPlayer', './assets/janitorship.png');
         this.load.image('Background', './assets/tempbackground.png');
         this.load.image('Background2', './assets/tempbackground2.png');
+        this.load.image('planet', './assets/planetBackground.png');
         this.load.image('shipTrail', './assets/trail.png');
-        this.load.image('smolAsteroids', './assets/smallAsteroid.png');
+        this.load.image('smolAsteroid', './assets/smallAsteroid.png');
         this.load.image('bicAsteroid', './assets/bigAsteroid.png');
+        this.load.image('alien', './assets/ufo.png');
         this.load.image('cometDebris', './assets/comet.png');
         this.load.image('playerUI', './assets/playerHud.png');
 
