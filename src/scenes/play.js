@@ -5,7 +5,6 @@ class Play extends Phaser.Scene {
 
     create() {
 
-        brush = this.make.image({ key: 'brush' }, false).setScale(0.5);
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         //var rt is a render texture for the trail the player can make on left click.
