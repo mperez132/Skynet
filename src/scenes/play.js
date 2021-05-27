@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
     create() {
 
+        brush = this.make.image({ key: 'brush' }, false).setScale(0.5);
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         //var rt is a render texture for the trail the player can make on left click.
@@ -41,6 +42,7 @@ class Play extends Phaser.Scene {
         this.playerGroup = this.physics.add.group();
         this.debrisGroup = this.physics.add.group();
         this.cometGroup = this.physics.add.group();
+        this.trailGroup = this.physics.add.group();
          //Creation of the player ship with physics and the first asteroid. 
         player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
         this.playerGroup.add(player);
@@ -75,28 +77,33 @@ class Play extends Phaser.Scene {
 
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.gameStatus = false;
+        this.playerAlive = true;
     }
     //Allowing the player to follow the mouse cursor 
     update(time, delta) {
-        if(!this.gameStatus) {
-
-            //time survived?
-            this.score += delta;
-
-        }
         particles.setPosition(this.comet01.x, this.comet01.y);
         pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
         this.backgroundSpace2.tilePositionY -= 0.6;
         this.planBack.tilePositionY -= 0.1;
-        player.body.allowRotation = false;
-        player.setCollideWorldBounds(true);
-        player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
-        var pointer = this.input.activePointer;
-        player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
-            game.input.activePointer.y, 60, 1500);
 
-        //pt.draw(particles, player.x , player.y, 1);
+        if(this.gameStatus) {
+            //time survived?
+            //this.score += delta;
+        }
+        if(this.playerAlive) {
+            player.body.allowRotation = false;
+            player.setCollideWorldBounds(true);
+            player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
+            var pointer = this.input.activePointer;
+            player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
+                game.input.activePointer.y, 60, 1500);
+            if(pointer.isDown){
+                console.log('down2');
+                rt.draw('shipTrail', player.x, player.y , 1);
+                //pt.draw(particles, player.x, player.y, 1);
+            }
+        }
         
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
@@ -107,11 +114,13 @@ class Play extends Phaser.Scene {
                 this.scene.start('menuScene');
             })
         }
-        if(pointer.isDown){
-            console.log('down2');
-            rt.draw('shipTrail', player.x, player.y , 1);
-            //pt.draw(particles, player.x, player.y, 1);
-        }
+
+        // if(this.physics.collide(this.trailGroup, this.debrisGroup)){
+        //     rt.erase(brush,this.debris01.x, this.debris01.y);
+        //     this.debris01.destroy();
+        //     this.debris01 = new Debris(this, Phaser.Math.Between(50, this.game.config.width-50), -100, 'bicAsteroid');
+        //     this.debrisGroup.add(this.debris01);
+        // }
         this.debris01.update();
         if(temp1 == true) {
             particles.setPosition(this.comet01.x, this.comet01.y);
@@ -119,6 +128,33 @@ class Play extends Phaser.Scene {
         }
         this.debris01.angle += 0.3
         this.checkDebris();
+
+        if(this.physics.collide(this.playerGroup, this.debrisGroup)) {
+            this.debris01.destroy();
+            player.destroy();
+            this.playerAlive = false;
+            this.gameStatus = true;
+            music.stop();
+            intro = false;
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                this.scene.start('menuScene');
+            })
+        }
+        if(this.physics.collide(this.playerGroup, this.cometGroup)) {
+            this.comet01.destroy();
+            player.destroy();
+            particles.destroy();
+            this.playerAlive = false;
+            this.gameStatus = true;
+            music.stop();
+            intro = false;
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                this.scene.start('menuScene');
+            })
+        }
+
     }
 
     checkDebris() {

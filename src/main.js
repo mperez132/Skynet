@@ -32,6 +32,7 @@ let ending = false;
 var player;
 var rt;
 var pt;
+var brush;
 let temp1 = false;
 var particles;
 
