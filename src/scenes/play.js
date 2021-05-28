@@ -8,43 +8,31 @@ class Play extends Phaser.Scene {
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
 
-        //Render texture for particles.
+        //Canvas texture for trail.
         if(canvasBool){ 
             rt.destroy();
-            pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
             //Canvas texture
-            planBack = this.textures.get('planet').getSourceImage();
-            this.add.image(0, 0, 'bg').setOrigin(0);
             //var rt is a render texture for the trail the player can make on left click.
             rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
-            trailShip = this.textures.get('shipTrail').getSourceImage();
             //planBack.setAlpha(0.1);
-            this.playerDraw = true;
-                if(this.playerDraw) {
-                    rt.draw(0, 0, planBack);
-                }
-            rt.context.globalCompositeOperation = 'destination-out';
-            this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
             canvasBool = true;
         }
         else{
-            pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
             //Canvas texture
-            planBack = this.textures.get('planet').getSourceImage();
-            this.add.image(0, 0, 'bg').setOrigin(0);
             //var rt is a render texture for the trail the player can make on left click.
             rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
-            trailShip = this.textures.get('shipTrail').getSourceImage();
             //planBack.setAlpha(0.1);
-            this.playerDraw = true;
-                if(this.playerDraw) {
-                    rt.draw(0, 0, planBack);
-                }
-            rt.context.globalCompositeOperation = 'destination-out';
-            this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
             canvasBool = true;
         }
-
+        planBack = this.textures.get('planet').getSourceImage();
+        this.add.image(0, 0, 'bg').setOrigin(0);
+        trailShip = this.textures.get('shipTrail').getSourceImage();
+        this.playerDraw = true;
+        if(this.playerDraw) {
+            rt.draw(0, 0, planBack);
+        }
+    rt.context.globalCompositeOperation = 'destination-out';
+        this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
         // //Canvas texture
         // planBack = this.textures.get('planet').getSourceImage();
         // this.add.image(0, 0, 'bg').setOrigin(0);
@@ -69,6 +57,7 @@ class Play extends Phaser.Scene {
         this.backgroundSpace2.setAlpha(0.5);
 
         //Particles
+        pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
         particles = this.add.particles('flare');
         particles.createEmitter({
             frame: 'blue',
