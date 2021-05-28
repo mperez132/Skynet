@@ -13,6 +13,7 @@ class Menu extends Phaser.Scene {
             
 
         music = this.sound.add('musicBackground');
+        music.stop();
         startButton = this.sound.add('musicStart');
         startButton.volume = 0.01;
         music.volume = 0.05;

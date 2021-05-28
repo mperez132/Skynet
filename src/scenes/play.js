@@ -137,6 +137,7 @@ class Play extends Phaser.Scene {
         this.checkDebris();
 
         if(this.physics.collide(this.playerGroup, this.debrisGroup)) {
+            music.stop();
             this.debris01.destroy();
             player.setAlpha(0);
             //player.destroy();
@@ -154,6 +155,7 @@ class Play extends Phaser.Scene {
             })
         }
         if(this.physics.collide(this.playerGroup, this.cometGroup)) {
+            music.stop();
             this.comet01.destroy();
             player.setAlpha(0);
             //player.destroy();
