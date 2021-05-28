@@ -12,14 +12,12 @@ class Play extends Phaser.Scene {
         if(canvasBool){ 
             rt.destroy();
             //Canvas texture
-            //var rt is a render texture for the trail the player can make on left click.
             rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
             //planBack.setAlpha(0.1);
             canvasBool = true;
         }
         else{
             //Canvas texture
-            //var rt is a render texture for the trail the player can make on left click.
             rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
             //planBack.setAlpha(0.1);
             canvasBool = true;
@@ -31,23 +29,8 @@ class Play extends Phaser.Scene {
         if(this.playerDraw) {
             rt.draw(0, 0, planBack);
         }
-    rt.context.globalCompositeOperation = 'destination-out';
+        rt.context.globalCompositeOperation = 'destination-out';
         this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
-        // //Canvas texture
-        // planBack = this.textures.get('planet').getSourceImage();
-        // this.add.image(0, 0, 'bg').setOrigin(0);
-        // //var rt is a render texture for the trail the player can make on left click.
-        // rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
-        // trailShip = this.textures.get('shipTrail').getSourceImage();
-        // //planBack.setAlpha(0.1);
-        // this.playerDraw = true;
-        // if(this.playerDraw) {
-        //     rt.draw(0, 0, planBack);
-        // }
-        // //rt.draw(0, 0, planBack);
-        // rt.context.globalCompositeOperation = 'destination-out';
-        // this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
-
 
         //Backgrounds
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
