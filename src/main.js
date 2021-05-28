@@ -32,7 +32,9 @@ let ending = false;
 var player;
 var rt;
 var pt;
-var brush;
+//var brush;
+var trailShip;
+var planBack;
 let temp1 = false;
 var particles;
 

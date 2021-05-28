@@ -14,6 +14,7 @@ class Load extends Phaser.Scene {
         this.load.image('alien', './assets/ufo.png');
         this.load.image('cometDebris', './assets/comet.png');
         this.load.image('playerUI', './assets/playerHud.png');
+        this.load.image('bg', './assets/pixil-frame-0.png');
 
         //Loading Dialog assets
         this.load.json('dialog', './assets/json/dialog.json');
