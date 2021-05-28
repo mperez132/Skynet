@@ -8,21 +8,57 @@ class Play extends Phaser.Scene {
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
 
-
         //Render texture for particles.
-        pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+        if(canvasBool){ 
+            rt.destroy();
+            pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+            //Canvas texture
+            planBack = this.textures.get('planet').getSourceImage();
+            this.add.image(0, 0, 'bg').setOrigin(0);
+            //var rt is a render texture for the trail the player can make on left click.
+            rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
+            trailShip = this.textures.get('shipTrail').getSourceImage();
+            //planBack.setAlpha(0.1);
+            this.playerDraw = true;
+                if(this.playerDraw) {
+                    rt.draw(0, 0, planBack);
+                }
+            rt.context.globalCompositeOperation = 'destination-out';
+            this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
+            canvasBool = true;
+        }
+        else{
+            pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
+            //Canvas texture
+            planBack = this.textures.get('planet').getSourceImage();
+            this.add.image(0, 0, 'bg').setOrigin(0);
+            //var rt is a render texture for the trail the player can make on left click.
+            rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
+            trailShip = this.textures.get('shipTrail').getSourceImage();
+            //planBack.setAlpha(0.1);
+            this.playerDraw = true;
+                if(this.playerDraw) {
+                    rt.draw(0, 0, planBack);
+                }
+            rt.context.globalCompositeOperation = 'destination-out';
+            this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
+            canvasBool = true;
+        }
 
-
-        //Canvas texture
-        planBack = this.textures.get('planet').getSourceImage();
-        this.add.image(0, 0, 'bg').setOrigin(0);
-        //var rt is a render texture for the trail the player can make on left click.
-        rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
-        trailShip = this.textures.get('shipTrail').getSourceImage();
-        //planBack.setAlpha(0.1);
-        rt.draw(0, 0, planBack);
-        rt.context.globalCompositeOperation = 'destination-out';
-        this.add.image(0,0, 'canvastexture').setOrigin(0);
+        // //Canvas texture
+        // planBack = this.textures.get('planet').getSourceImage();
+        // this.add.image(0, 0, 'bg').setOrigin(0);
+        // //var rt is a render texture for the trail the player can make on left click.
+        // rt = this.textures.createCanvas('canvastexture', game.config.width, game.config.height);
+        // trailShip = this.textures.get('shipTrail').getSourceImage();
+        // //planBack.setAlpha(0.1);
+        // this.playerDraw = true;
+        // if(this.playerDraw) {
+        //     rt.draw(0, 0, planBack);
+        // }
+        // //rt.draw(0, 0, planBack);
+        // rt.context.globalCompositeOperation = 'destination-out';
+        // this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
 
 
         //Backgrounds
@@ -32,8 +68,7 @@ class Play extends Phaser.Scene {
             'Background2').setOrigin(0,0);
         this.backgroundSpace2.setAlpha(0.5);
 
-
-
+        //Particles
         particles = this.add.particles('flare');
         particles.createEmitter({
             frame: 'blue',
@@ -103,28 +138,21 @@ class Play extends Phaser.Scene {
             //time survived?
             //this.score += delta;
         }
-
-        //If player is alive
-        if(this.playerAlive) {
-            player.body.allowRotation = false;
-            player.setCollideWorldBounds(true);
-            player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
-            var pointer = this.input.activePointer;
-            player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
-                game.input.activePointer.y, 60, 1500);
-            if (pointer.isDown) {
-                rt.draw(player.x, player.y, trailShip);
-            }
-        }
-        
         //Start game
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
+            //player.setAlpha(0);
+            //player.destroy();
+            this.playerAlive = false;
+            this.gameStatus = true;
+            this.playerDraw = false;
+
             music.stop();
             intro = false;
+            //rt.destroy();
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                rt.destroy();
+                //rt.destroy();
                 this.scene.start('menuScene');
             })
         }
@@ -138,32 +166,53 @@ class Play extends Phaser.Scene {
 
         if(this.physics.collide(this.playerGroup, this.debrisGroup)) {
             this.debris01.destroy();
-            player.destroy();
+            player.setAlpha(0);
+            //player.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
+            this.playerDraw = false;
+
             music.stop();
             intro = false;
+            //rt.destroy();
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                rt.destroy();
+                //rt.destroy();
                 this.scene.start('menuScene');
             })
         }
         if(this.physics.collide(this.playerGroup, this.cometGroup)) {
             this.comet01.destroy();
-            player.destroy();
+            player.setAlpha(0);
+            //player.destroy();
             particles.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
+            this.playerDraw = false;
             music.stop();
             intro = false;
+            //rt.destroy();
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                rt.destroy();
+                //rt.destroy();
                 this.scene.start('menuScene');
             })
         }
-
+        //If player is alive
+        if(this.playerAlive) {
+            player.body.allowRotation = false;
+            player.setCollideWorldBounds(true);
+            player.body.setBoundsRectangle(new Phaser.Geom.Rectangle(0,0,1440, 890));
+            var pointer = this.input.activePointer;
+            player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
+                game.input.activePointer.y, 60, 1500);
+        
+            if (this.playerDraw){
+                if (pointer.isDown) {
+                    rt.draw(player.x, player.y, trailShip);
+                }
+            }
+        }
         //rt.refresh();
     }
 

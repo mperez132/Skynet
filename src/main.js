@@ -35,6 +35,7 @@ var pt;
 //var brush;
 var trailShip;
 var planBack;
+let canvasBool = false;
 let temp1 = false;
 var particles;
 
