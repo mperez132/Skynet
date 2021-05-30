@@ -17,6 +17,7 @@ let config = {
                 x: 0,
                 y: 0
             },
+            fps:60,
         }
     },
     scene: [Load, Menu, Talking, Play],
@@ -36,6 +37,8 @@ var pt;
 var trailShip;
 var planBack;
 let canvasBool = false;
+var tempColor;
+var color;
 let temp1 = false;
 var particles;
 
