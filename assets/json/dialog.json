@@ -23,12 +23,21 @@
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "You have multiple bogeys inbound with collision courses set for targets across California. You're the only Janitor in the area. You have the green light to intercept!",
+			"dialog" : "You have multiple bogeys inbound with collision courses across California. You're the only Janitor in the area. You have the green light to intercept!",
 			"newSpeaker" : "true"
 		},
 		{	
+			"speaker" : "boss",
+			"dialog" : "But before you go make sure all your controls work. Try Moving your ship with the mouse cursor.",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "Now try moving and holding the left mouse button to create your trail. This is how you'll destroy the debris. QUICK! Destroy that comet over there!"
+		},
+		{	
 			"speaker" : "janitor",
-			"dialog" : "This is JANITOR 5-0 on new heading 147. On course to intercept. ETA 2 minutes, over.",
+			"dialog" : "Got it! Everything seems to check out. This is JANITOR 5-0 on new heading 147. On course to intercept. ETA 2 minutes, over.",
 			"newSpeaker" : "true"
 		}
 	]

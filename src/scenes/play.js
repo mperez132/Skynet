@@ -30,11 +30,14 @@ class Play extends Phaser.Scene {
         this.canvasTEXT = this.add.image(0,0, 'canvastexture').setOrigin(0);
 
         //Backgrounds
+        this.add.image(0,0,'planet').setOrigin(0,0).setAlpha(0.1);
         this.backgroundSpace = this.add.tileSprite(0,0, game.config.width, game.config.height,
             'Background').setOrigin(0,0);
         this.backgroundSpace2 = this.add.tileSprite(0,0, game.config.width, game.config.height - 20,
             'Background2').setOrigin(0,0);
         this.backgroundSpace2.setAlpha(0.5);
+
+
 
         //Particles
         pt = this.add.renderTexture(0,0, game.config.width, game.config.height,).setInteractive().setDepth(1000);
@@ -72,8 +75,7 @@ class Play extends Phaser.Scene {
         //}, null, this); 
 
         //Player UI
-        this.pUI = this.add.tileSprite(0,0, game.config.width, game.config.height,
-            'playerUI').setOrigin(0,0);
+        this.pUI = this.add.image(0,0,'playerUI').setOrigin(0,0);
         this.pUI.depth = 100;
         // menu text configuration
         let playConfig = {

@@ -33,12 +33,17 @@ let ending = false;
 var player;
 var rt;
 var pt;
-//var brush;
 var trailShip;
-var planBack;
 let canvasBool = false;
 var tempColor;
 var color;
+
+let PlayerMoney;
+let TrailTime;
+let PlayerBonus;
+let PlayerFuel;
+
+
 let temp1 = false;
 var particles;
 
