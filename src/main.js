@@ -48,6 +48,5 @@ let temp1 = false;
 var particles;
 
 
-
 let keyLEFT, keyRIGHT, keyR, keyUP, keyDOWN;
 
