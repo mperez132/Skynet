@@ -5,6 +5,12 @@ class Play extends Phaser.Scene {
 
     preload() {
         //this.load.image('shipTrail', './assets/trail.png');
+        this.load.spritesheet('animateShip', './assets/animatedJanitorShip.png',{
+            frameWidth: 64,
+            frameHeight: 64,
+            startFrame: 0,
+            endFrame: 3
+        });
     }
 
     create() {
@@ -63,6 +69,17 @@ class Play extends Phaser.Scene {
          //Creation of the player ship with physics and the first asteroid. 
         player = this.physics.add.sprite(game.config.width /2, game.config.height /2 , 'ShipPlayer');
         this.playerGroup.add(player);
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('animateShip',{
+                start: 0,
+                end: 3,
+                first: 0
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+        player.anims.play('idle');
         this.debris01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width), -100, 'smolAsteroid').setOrigin(0.5,0.5);
         this.debrisGroup.add(this.debris01);
 
@@ -173,6 +190,7 @@ class Play extends Phaser.Scene {
             var pointer = this.input.activePointer;
             player.rotation = this.physics.moveTo(player, game.input.activePointer.x, 
                 game.input.activePointer.y, 600, 1000);
+            //player.anims.play('idle');
         
             if (this.playerDraw){
                 if (pointer.isDown) {
