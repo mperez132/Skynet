@@ -33,6 +33,8 @@ let startButton;
 let debrisSound;
 let idleSound;
 let goSound;
+let sheeshSound;
+let trailSound;
 
 var colorDebris02;
 

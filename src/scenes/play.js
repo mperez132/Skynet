@@ -26,6 +26,13 @@ class Play extends Phaser.Scene {
         idleSound.volume = 0.02;
         idleSound.loop = true;
         idleSound.play();
+
+        sheeshSound = this.sound.add('sheesh');
+        sheeshSound.volume = 0.02;
+
+        trailSound = this.sound.add('trailFade');
+        trailSound.volume = 0.02;
+
         //Canvas texture for trail.
         if(canvasBool){ 
             rt.destroy();
@@ -100,6 +107,7 @@ class Play extends Phaser.Scene {
         this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
         this.comet01.movementSpeed = 2;
         this.cometGroup.add(this.comet01);
+        sheeshSound.play();
         particles.setPosition(this.comet01.x, this.comet01.y);
         temp1 = true;
         //}, null, this); 
@@ -175,6 +183,7 @@ class Play extends Phaser.Scene {
                 phaser2.setText('COMPENSATION: $ ' + PlayerMoney + '.00');
                 if(TrailTime >= 2) {
                     //sound for trail destroying
+                    trailSound.play();
                     rt.clear();
                     TrailTime = 0;
                 }
@@ -268,6 +277,7 @@ class Play extends Phaser.Scene {
             if(TrailTime >= 2) {
                 //sound for trail destroying
                 rt.clear();
+                trailSound.play();
                 TrailTime = 0;
             }
             this.debris01.destroy();
@@ -291,6 +301,7 @@ class Play extends Phaser.Scene {
             PlayerMoney += 15;
             debrisSound.play();
             var temp = this.comet01.getTopLeft();
+            this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
             rt.clear(temp.x, temp.y, this.comet01.width, this.comet01.height);
             //money sound
 
@@ -299,6 +310,7 @@ class Play extends Phaser.Scene {
             if(TrailTime >= 2) {
                 //sound for trail destroying
                 rt.clear();
+                trailSound.play();
                 TrailTime = 0;
             }
             particles.destroy();
@@ -321,6 +333,12 @@ class Play extends Phaser.Scene {
                 this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
                 this.comet01.movementSpeed = 2;
                 this.cometGroup.add(this.comet01);
+                //sheeshSound.play();
+                if(this.texturePicker == 1) {
+                    sheeshSound.play();
+                }
+                else if(this.texturePicker == 2) {
+                }
         }
         //rt.refresh();
     }
@@ -337,6 +355,7 @@ class Play extends Phaser.Scene {
                 if(debrisCount <= 0) {
                     earthBool = true;
                     music.stop();
+                    debrisCount = 3;
                     intro = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
@@ -365,6 +384,7 @@ class Play extends Phaser.Scene {
             this.cameras.main.shake(200, 0.01);
             if(debrisCount <= 0) {
                 earthBool = true;
+                debrisCount = 3;
                 music.stop();
                 intro = false;
                 //this.cameras.main.shake(200, 0.01);
@@ -388,11 +408,13 @@ class Play extends Phaser.Scene {
             if(this.comet01.y >= game.config.height + 50) {
                 //console.log(this.texturePicker);
                 debrisCount -= 1;
+                this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
                 this.comet01.destroy();
                 particles.destroy();
                 this.cameras.main.shake(200, 0.01);
                 if(debrisCount <= 0) {
                     earthBool = true;
+                    debrisCount = 3;
                     music.stop();
                     idleSound.stop();
                     intro = false;
@@ -419,6 +441,11 @@ class Play extends Phaser.Scene {
                 this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
                 this.comet01.movementSpeed = 2;
                 this.cometGroup.add(this.comet01);
+                if(this.texturePicker == 1) {
+                    sheeshSound.play();
+                }
+                else if(this.texturePicker == 2) {
+                }
             }
         }
     }
