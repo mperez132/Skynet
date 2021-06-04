@@ -144,7 +144,9 @@ class Play extends Phaser.Scene {
         pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
         this.backgroundSpace2.tilePositionY -= 0.6;
-
+        this.debris01.update();
+        particles.setPosition(this.comet01.x, this.comet01.y);
+        this.comet01.update();
         //console.log(color);
         if(this.gameStatus) {
             //time survived?
@@ -164,10 +166,9 @@ class Play extends Phaser.Scene {
                 this.scene.start('menuScene');
             })
         }
-        this.debris01.update();
         if(temp2) {
-            colorDebris02 = rt.getPixel(this.debris02.x, this.debris02.y);
             this.debris02.update();
+            colorDebris02 = rt.getPixel(this.debris02.x, this.debris02.y);
             if(colorDebris02.r == 29 && colorDebris02.g == 207 && colorDebris02.b == 231) {
                 colorDebris02.r == 0;
                 colorDebris02.g == 0;
@@ -202,10 +203,6 @@ class Play extends Phaser.Scene {
             }
 
         }
-        if(temp1 == true) {
-            particles.setPosition(this.comet01.x, this.comet01.y);
-            this.comet01.update();
-        }
         //this.debris01.angle += 0.3
         this.checkDebris();
 
@@ -213,6 +210,7 @@ class Play extends Phaser.Scene {
             music.stop();
             idleSound.stop();
             this.debris01.destroy();
+            this.debris02.destroy();
             player.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
@@ -220,6 +218,11 @@ class Play extends Phaser.Scene {
 
             music.stop();
             intro = false;
+            PlayerMoney = 0;
+            TrailTime = 0;
+            debrisCount = 3;
+            temp1 = false;
+            temp2 = false;
             //this.cameras.main.shake(200, 0.01);
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -237,6 +240,11 @@ class Play extends Phaser.Scene {
             this.playerDraw = false;
             music.stop();
             intro = false;
+            PlayerMoney = 0;
+            TrailTime = 0;
+            debrisCount = 3;
+            temp1 = false;
+            temp2 = false;
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
                 this.scene.start('crashScene');
@@ -355,8 +363,12 @@ class Play extends Phaser.Scene {
                 if(debrisCount <= 0) {
                     earthBool = true;
                     music.stop();
-                    debrisCount = 3;
                     intro = false;
+                    PlayerMoney = 0;
+                    TrailTime = 0;
+                    debrisCount = 3;
+                    temp1 = false;
+                    temp2 = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -384,9 +396,13 @@ class Play extends Phaser.Scene {
             this.cameras.main.shake(200, 0.01);
             if(debrisCount <= 0) {
                 earthBool = true;
-                debrisCount = 3;
                 music.stop();
                 intro = false;
+                PlayerMoney = 0;
+                TrailTime = 0;
+                debrisCount = 3;
+                temp1 = false;
+                temp2 = false;
                 //this.cameras.main.shake(200, 0.01);
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
                 this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -414,10 +430,14 @@ class Play extends Phaser.Scene {
                 this.cameras.main.shake(200, 0.01);
                 if(debrisCount <= 0) {
                     earthBool = true;
+                    PlayerMoney = 0;
+                    TrailTime = 0;
                     debrisCount = 3;
                     music.stop();
                     idleSound.stop();
                     intro = false;
+                    temp1 = false;
+                    temp2 = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
