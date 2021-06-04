@@ -59,9 +59,9 @@ class Crash extends Phaser.Scene {
         if (earthBool == false) {
             this.dialog = this.cache.json.get('dialogCrash');
         }
-        if(firedBool == true) {
-            this.dialog = this.cache.json.get('dialogFired');
-        }
+        // if(firedBool == true) {
+        //     this.dialog = this.cache.json.get('dialogFired');
+        // }
         
         // initialize dialog text objects (with no text)
         this.dialogText = this.add.bitmapText(this.TEXT_X, this.TEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
@@ -131,11 +131,20 @@ class Crash extends Phaser.Scene {
             intro = false;
             ending = false;
             earthBool = false;
-            firedBool = false;
-            this.cameras.main.fadeOut(1000, 0, 0, 0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                this.scene.start('menuScene');
-            })
+            if(firedBool) {
+                firedBool = false;
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('gameOverScene');
+                })
+            }
+            else {
+                firedBool = false;
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('menuScene');
+                })
+            }
         }
     }
 }

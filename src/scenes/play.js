@@ -1,6 +1,7 @@
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
+        this.nextText;
     }
 
     preload() {
@@ -118,20 +119,8 @@ class Play extends Phaser.Scene {
         //Player UI
         this.pUI = this.add.image(0,0,'playerUI').setOrigin(0,0);
         this.pUI.depth = 100;
-        // menu text configuration
-        let playConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
         phaser2 = this.add.dynamicBitmapText(0, 0, 'gem_font', 'COMPENSATION: $ ' + PlayerMoney + '.00', 35);
+        this.nextText = this.add.dynamicBitmapText(1100, 0, 'gem_font', 'CITIES REMAINING: ' + debrisCount, 35);
 
         //Keyboard controller
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -151,10 +140,7 @@ class Play extends Phaser.Scene {
         particles.setPosition(this.comet01.x, this.comet01.y);
         this.comet01.update();
         //console.log(color);
-        if(this.gameStatus) {
-            //time survived?
-            //this.score += delta;
-        }
+        
         //Start game
         if(Phaser.Input.Keyboard.JustDown(keyUP)) {
             startButton.play();
@@ -223,7 +209,6 @@ class Play extends Phaser.Scene {
             playerSound.play();
             music.stop();
             intro = false;
-            PlayerMoney = 0;
             TrailTime = 0;
             debrisCount = 3;
             temp1 = false;
@@ -246,7 +231,6 @@ class Play extends Phaser.Scene {
             this.playerDraw = false;
             music.stop();
             intro = false;
-            PlayerMoney = 0;
             TrailTime = 0;
             debrisCount = 3;
             temp1 = false;
@@ -361,6 +345,7 @@ class Play extends Phaser.Scene {
         if(temp2) {
             if(this.debris02.y >= game.config.height) {
                 debrisCount -= 1;
+                this.nextText.setText('CITIES REMAINING: ' + debrisCount);
                 this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
                 console.log('Debris coutner = ' + debrisCount);
                 //console.log(this.texturePicker);
@@ -370,11 +355,11 @@ class Play extends Phaser.Scene {
                     earthBool = true;
                     music.stop();
                     intro = false;
-                    PlayerMoney = 0;
                     TrailTime = 0;
                     debrisCount = 3;
                     temp1 = false;
                     temp2 = false;
+                    firedBool = true;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -395,6 +380,7 @@ class Play extends Phaser.Scene {
         }
         if(this.debris01.y >= game.config.height) {
             debrisCount -= 1;
+            this.nextText.setText('CITIES REMAINING: ' + debrisCount);
             this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
             console.log('Debris coutner = ' + debrisCount);
             //console.log(this.texturePicker);
@@ -404,11 +390,11 @@ class Play extends Phaser.Scene {
                 earthBool = true;
                 music.stop();
                 intro = false;
-                PlayerMoney = 0;
                 TrailTime = 0;
                 debrisCount = 3;
                 temp1 = false;
                 temp2 = false;
+                firedBool = true;
                 //this.cameras.main.shake(200, 0.01);
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
                 this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -430,13 +416,13 @@ class Play extends Phaser.Scene {
             if(this.comet01.y >= game.config.height + 50) {
                 //console.log(this.texturePicker);
                 debrisCount -= 1;
+                this.nextText.setText('CITIES REMAINING: ' + debrisCount);
                 this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
                 this.comet01.destroy();
                 particles.destroy();
                 this.cameras.main.shake(200, 0.01);
                 if(debrisCount <= 0) {
                     earthBool = true;
-                    PlayerMoney = 0;
                     TrailTime = 0;
                     debrisCount = 3;
                     music.stop();
@@ -444,6 +430,7 @@ class Play extends Phaser.Scene {
                     intro = false;
                     temp1 = false;
                     temp2 = false;
+                    firedBool = true;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {

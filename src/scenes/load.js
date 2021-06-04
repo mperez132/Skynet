@@ -24,6 +24,7 @@ class Load extends Phaser.Scene {
         this.load.image('boxDialog', './assets/img/dialogbox.png');
         this.load.image ('playerModel', './assets/img/PlayerFace.png');
         this.load.image ('bossModel', './assets/img/BossFace.png');
+        this.load.image ('paycheck', './assets/compensation.png');
         this.load.bitmapFont('gem_font', './assets/font/gem.png', './assets/font/gem.xml');
 
         //Loading particle assets
