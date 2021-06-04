@@ -33,6 +33,9 @@ class Play extends Phaser.Scene {
         trailSound = this.sound.add('trailFade');
         trailSound.volume = 0.02;
 
+        playerSound = this.sound.add('playerExplosion');
+        playerSound.volume = 0.02;
+
         //Canvas texture for trail.
         if(canvasBool){ 
             rt.destroy();
@@ -210,12 +213,14 @@ class Play extends Phaser.Scene {
             music.stop();
             idleSound.stop();
             this.debris01.destroy();
-            this.debris02.destroy();
+            if(temp2) {
+                this.debris02.destroy();
+            }
             player.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
             this.playerDraw = false;
-
+            playerSound.play();
             music.stop();
             intro = false;
             PlayerMoney = 0;
@@ -235,6 +240,7 @@ class Play extends Phaser.Scene {
             this.comet01.destroy();
             player.destroy()
             particles.destroy();
+            playerSound.play();
             this.playerAlive = false;
             this.gameStatus = true;
             this.playerDraw = false;

@@ -35,6 +35,7 @@ let idleSound;
 let goSound;
 let sheeshSound;
 let trailSound;
+let playerSound;
 
 var colorDebris02;
 

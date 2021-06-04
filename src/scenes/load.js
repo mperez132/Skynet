@@ -37,6 +37,7 @@ class Load extends Phaser.Scene {
         this.load.audio('gameOverSound', './assets/Game_Over_Lng_Mix.mp3');
         this.load.audio('sheesh', './assets/Sheesh_Crop.mp3');
         this.load.audio('trailFade', './assets/Trail_Fade.mp3');
+        this.load.audio('playerExplosion', './assets/Enemy_Explosion5.mp3');
     }
 
     create() {
