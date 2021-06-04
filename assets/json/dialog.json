@@ -39,6 +39,11 @@
 			"speaker" : "janitor",
 			"dialog" : "Got it! Everything seems to check out. This is JANITOR 5-0 on new heading 147. On course to intercept. ETA 2 minutes, over.",
 			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "Houston copies. Just make sure to not cause damage to the loaner starship. Good Luck out there JANITOR.",
+			"newSpeaker" : "true"
 		}
 	]
 ]
