@@ -99,6 +99,17 @@ class Talking extends Phaser.Scene {
         this.playerGroup = this.physics.add.group();
         this.playerGroup.add(player);
         player.angle = -90;
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('animateShip',{
+                start: 0,
+                end: 3,
+                first: 0
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+        player.anims.play('idle');
         this.dialog = this.cache.json.get('dialog');
         this.dialogbox = this.add.sprite(0,0, 'boxDialog').setOrigin(0);
         // initialize dialog text objects (with no text)
@@ -133,6 +144,27 @@ class Talking extends Phaser.Scene {
                 if (pointer.isDown) {
                     rt.draw(player.x, player.y, trailShip);
                 }
+            }
+            if(this.physics.collide(this.playerGroup, this.cometGroup)) {
+                music.stop();
+                //idleSound.stop();
+                this.comet01.destroy();
+                player.destroy()
+                particles.destroy();
+                playerSound.play();
+                this.playerAlive = false;
+                this.gameStatus = true;
+                this.playerDraw = false;
+                //music.stop();
+                intro = false;
+                TrailTime = 0;
+                debrisCount = 3;
+                temp1 = false;
+                temp2 = false;
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('crashScene');
+                })
             }
         }
             var timedEvent = this.time.delayedCall(7000, this.onEvent, [], this);

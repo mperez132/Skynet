@@ -15,6 +15,12 @@ class Load extends Phaser.Scene {
         this.load.image('cometDebris', './assets/comet.png');
         this.load.image('playerUI', './assets/playerHud.png');
         this.load.image('bg', './assets/pixil-frame-0.png');
+        this.load.spritesheet('animateShip', './assets/animatedJanitorShip.png',{
+            frameWidth: 64,
+            frameHeight: 64,
+            startFrame: 0,
+            endFrame: 3
+        });
 
         //Loading Dialog assets
         this.load.json('dialog', './assets/json/dialog.json');

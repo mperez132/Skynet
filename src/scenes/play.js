@@ -6,12 +6,12 @@ class Play extends Phaser.Scene {
 
     preload() {
         //this.load.image('shipTrail', './assets/trail.png');
-        this.load.spritesheet('animateShip', './assets/animatedJanitorShip.png',{
-            frameWidth: 64,
-            frameHeight: 64,
-            startFrame: 0,
-            endFrame: 3
-        });
+        // this.load.spritesheet('animateShip', './assets/animatedJanitorShip.png',{
+        //     frameWidth: 64,
+        //     frameHeight: 64,
+        //     startFrame: 0,
+        //     endFrame: 3
+        // });
     }
 
     create() {
