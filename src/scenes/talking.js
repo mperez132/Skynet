@@ -35,7 +35,18 @@ class Talking extends Phaser.Scene {
 
     create() {
         this.cameras.main.fadeIn(1000, 0, 0, 0)
+        this.dialogConvo = 0;			
+        this.dialogLine = 0;			
+        this.dialogSpeaker = null;		
+        this.dialogLastSpeaker = null;	
+        this.dialogTyping = false;		
+        this.dialogText = null;			
+        this.nextText = null;			
 
+        this.janitor = null;
+        this.boss = null;
+        this.tweenDuration = 300;
+        this.newSpeakerCounter = 0;
          //Canvas texture for trail.
          if(canvasBool){ 
             rt.destroy();
@@ -208,7 +219,8 @@ class Talking extends Phaser.Scene {
         }
         if(ending) {
             startButton.play();
-            intro = false;
+            intro = true;
+            ending = false;
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
                 pt.destroy();

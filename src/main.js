@@ -20,15 +20,20 @@ let config = {
             fps:60,
         }
     },
-    scene: [Load, Menu, Talking, Play],
+    scene: [Load, Menu, Talking, Play, Crash, Gameover],
 }
 let game = new Phaser.Game(config);
 const centerX = game.config.width / 2;
 const centerY = game.config.height / 2;
 let keySPACE = null;
 let intro = true;
+
 let music;
 let startButton;
+let debrisSound;
+
+var colorDebris02;
+
 let ending = false;
 var player;
 var rt;
@@ -38,13 +43,15 @@ let canvasBool = false;
 var tempColor;
 var color;
 
-let PlayerMoney;
-let TrailTime;
-let PlayerBonus;
-let PlayerFuel;
+let PlayerMoney = 0;
+var phaser2;
+let TrailTime = 0;
+let debrisCount = 3;
 
-
+let earthBool = false;
+let firedBool = false;
 let temp1 = false;
+let temp2 = false;
 var particles;
 
 

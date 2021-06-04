@@ -1,0 +1,17 @@
+[
+	[
+		{	
+			"speaker" : "boss",
+			"dialog" : "Well that didn't go well...",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "That's coming out of your LAST paycheck..."
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "You're fired."
+		}
+	]
+]

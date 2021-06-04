@@ -1,0 +1,17 @@
+[
+	[
+		{	
+			"speaker" : "boss",
+			"dialog" : "Looks like you've totaled a company starship...",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "might wanna update that resumé..."
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "because, yeah...you're fired."
+		}
+	]
+]

@@ -1,0 +1,17 @@
+[
+	[
+		{	
+			"speaker" : "boss",
+			"dialog" : "Good work out there today, here's your commission... ",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "You're probably gonna want to make that last..."
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "No more incoming debris for at least a year so..."
+		}
+	]
+]

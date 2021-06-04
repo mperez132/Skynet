@@ -18,6 +18,9 @@ class Load extends Phaser.Scene {
 
         //Loading Dialog assets
         this.load.json('dialog', './assets/json/dialog.json');
+        this.load.json('dialogCrash', './assets/json/crashDialog.json');
+        this.load.json('dialogDebris', './assets/json/debrisDialog.json');
+        this.load.json('dialogFired', './assets/json/firedDialog.json');
         this.load.image('boxDialog', './assets/img/dialogbox.png');
         this.load.image ('playerModel', './assets/img/PlayerFace.png');
         this.load.image ('bossModel', './assets/img/BossFace.png');
@@ -27,8 +30,10 @@ class Load extends Phaser.Scene {
         this.load.atlas('flare', 'assets/flares.png', 'assets/json/flares.json');
 
         //loading sound
-        this.load.audio('musicBackground','./assets/Backfill.mp3')
-        this.load.audio('musicStart','./assets/Start_Tone.mp3')
+        this.load.audio('musicBackground','./assets/Backfill.mp3');
+        this.load.audio('ship_sfx', './assets/Ship_Hum.mp3');
+        this.load.audio('musicStart','./assets/Start_Tone.mp3');
+        this.load.audio('debris_sfx', './assets/Asteroid_Destroyed_1.mp3');
     }
 
 

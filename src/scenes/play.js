@@ -15,8 +15,12 @@ class Play extends Phaser.Scene {
 
     create() {
 
+        PlayerMoney = 0;
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
+
+        debrisSound = this.sound.add('debris_sfx');
+        debrisSound.volume =0.05;
 
         //Canvas texture for trail.
         if(canvasBool){ 
@@ -80,12 +84,17 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
         player.anims.play('idle');
-        this.debris01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+        this.debris01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
         this.debrisGroup.add(this.debris01);
 
+        this.clock = this.time.delayedCall(8000, () => {
+            this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+            this.debrisGroup.add(this.debris02);
+            temp2 = true;
+        }, null, this);
         //this.clock = this.time.delayedCall(3000, () => {
-        this.comet01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width), -100, 'cometDebris');
-        this.comet01.movementSpeed = 4;
+        this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
+        this.comet01.movementSpeed = 2;
         this.cometGroup.add(this.comet01);
         particles.setPosition(this.comet01.x, this.comet01.y);
         temp1 = true;
@@ -107,6 +116,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        phaser2 = this.add.dynamicBitmapText(0, 0, 'gem_font', 'COMPENSATION: $ ' + PlayerMoney + '.00', 35);
 
         //Keyboard controller
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -123,10 +133,7 @@ class Play extends Phaser.Scene {
         this.backgroundSpace.tilePositionY -= 1.5;
         this.backgroundSpace2.tilePositionY -= 0.6;
 
-        color = rt.getPixel(this.debris01.x, this.debris01.y);
-        tempColor = rt.getPixel(this.comet01.x, this.comet01.y);
         //console.log(color);
-
         if(this.gameStatus) {
             //time survived?
             //this.score += delta;
@@ -145,6 +152,42 @@ class Play extends Phaser.Scene {
             })
         }
         this.debris01.update();
+        if(temp2) {
+            colorDebris02 = rt.getPixel(this.debris02.x, this.debris02.y);
+            this.debris02.update();
+            if(colorDebris02.r == 29 && colorDebris02.g == 207 && colorDebris02.b == 231) {
+                colorDebris02.r == 0;
+                colorDebris02.g == 0;
+                colorDebris02.b == 0;
+                TrailTime += 1;
+                PlayerMoney += 10;
+                debrisSound.play();
+                var temp = this.debris02.getTopLeft();
+                //console.log(temp);
+                rt.clear(temp.x, temp.y , this.debris02.width, this.debris02.height);
+                //money sound
+    
+                phaser2.setText('COMPENSATION: $ ' + PlayerMoney + '.00');
+                if(TrailTime >= 2) {
+                    //sound for trail destroying
+                    rt.clear();
+                    TrailTime = 0;
+                }
+                this.debris02.destroy();
+                this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
+                if(this.texturePicker == 1) {
+                    this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'bicAsteroid').setOrigin(0.5,0.5);
+                    this.debris02.movementSpeed = 1.5;
+                    this.debrisGroup.add(this.debris02);
+                }
+                else if(this.texturePicker == 2) {
+                    this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+                    this.debris02.movementSpeed = 1;
+                    this.debrisGroup.add(this.debris02);
+                }
+            }
+
+        }
         if(temp1 == true) {
             particles.setPosition(this.comet01.x, this.comet01.y);
             this.comet01.update();
@@ -162,9 +205,10 @@ class Play extends Phaser.Scene {
 
             music.stop();
             intro = false;
+            //this.cameras.main.shake(200, 0.01);
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                this.scene.start('menuScene');
+                this.scene.start('crashScene');
             })
         }
         if(this.physics.collide(this.playerGroup, this.cometGroup)) {
@@ -179,7 +223,7 @@ class Play extends Phaser.Scene {
             intro = false;
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
-                this.scene.start('menuScene');
+                this.scene.start('crashScene');
             })
         }
         //If player is alive
@@ -198,61 +242,175 @@ class Play extends Phaser.Scene {
                 }
             }
         }
+        color = rt.getPixel(this.debris01.x, this.debris01.y);
+        tempColor = rt.getPixel(this.comet01.x, this.comet01.y);
         if(color.r == 29 && color.g == 207 && color.b == 231) {
+            color.r == 0;
+            color.g == 0;
+            color.b == 0;
+            TrailTime += 1;
+            PlayerMoney += 10;
+            debrisSound.play();
             var temp = this.debris01.getTopLeft();
             //console.log(temp);
             rt.clear(temp.x, temp.y , this.debris01.width, this.debris01.height);
+            //money sound
+
+
+            phaser2.setText('COMPENSATION: $ ' + PlayerMoney + '.00');
+            if(TrailTime >= 2) {
+                //sound for trail destroying
+                rt.clear();
+                TrailTime = 0;
+            }
             this.debris01.destroy();
+            this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
+            if(this.texturePicker == 1) {
+                this.debris01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'bicAsteroid').setOrigin(0.5,0.5);
+                this.debris01.movementSpeed = 1.5;
+                this.debrisGroup.add(this.debris01);
+            }
+            else if(this.texturePicker == 2) {
+                this.debris01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+                this.debris01.movementSpeed = 1;
+                this.debrisGroup.add(this.debris01);
+            }
         }
         if(tempColor.r == 29 && tempColor.g == 207 && tempColor.b == 231) {
+            tempColor.r = 0 
+            tempColor.g = 0;
+            tempColor.b = 0;
+            TrailTime += 1;
+            PlayerMoney += 15;
+            debrisSound.play();
             var temp = this.comet01.getTopLeft();
             rt.clear(temp.x, temp.y, this.comet01.width, this.comet01.height);
+            //money sound
+
+
+            phaser2.setText('COMPENSATION: $ ' + PlayerMoney + '.00');
+            if(TrailTime >= 2) {
+                //sound for trail destroying
+                rt.clear();
+                TrailTime = 0;
+            }
             particles.destroy();
             this.comet01.destroy();
+            particles.destroy();
+                particles = this.add.particles('flare');
+                particles.createEmitter({
+                    frame: 'blue',
+                    x: 0,
+                    y: 0,
+                    speed: { min: 400, max: 200 },
+                    angle: { min: -85, max: -95 },
+                    gravityY: 300,
+                    scale: { start: 0.3, end: 0, ease: 'Back.easeOut' },
+                    quantity: 1,
+                    blendMode: 'ADD',
+                });
+                particles.setVisible(true);
+                particles.setPosition(this.comet01.x, this.comet01.y);
+                this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
+                this.comet01.movementSpeed = 2;
+                this.cometGroup.add(this.comet01);
         }
         //rt.refresh();
     }
 
     checkDebris() {
-        if(this.debris01.y >= game.config.height + 50) {
+        if(temp2) {
+            if(this.debris02.y >= game.config.height) {
+                debrisCount -= 1;
+                this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
+                console.log('Debris coutner = ' + debrisCount);
+                //console.log(this.texturePicker);
+                this.debris02.destroy();
+                this.cameras.main.shake(200, 0.01);
+                if(debrisCount <= 0) {
+                    earthBool = true;
+                    music.stop();
+                    intro = false;
+                    //this.cameras.main.shake(200, 0.01);
+                    this.cameras.main.fadeOut(1000, 0, 0, 0);
+                    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                        this.scene.start('crashScene');
+                    })
+                }
+                if(this.texturePicker == 1) {
+                    this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'bicAsteroid').setOrigin(0.5,0.5);
+                    this.debris02.movementSpeed = 1.5;
+                    this.debrisGroup.add(this.debris02);
+                }
+                else if(this.texturePicker == 2) {
+                    this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+                    this.debris02.movementSpeed = 1;
+                    this.debrisGroup.add(this.debris02);
+                }
+            }
+        }
+        if(this.debris01.y >= game.config.height) {
+            debrisCount -= 1;
             this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
+            console.log('Debris coutner = ' + debrisCount);
             //console.log(this.texturePicker);
             this.debris01.destroy();
+            this.cameras.main.shake(200, 0.01);
+            if(debrisCount <= 0) {
+                earthBool = true;
+                music.stop();
+                intro = false;
+                //this.cameras.main.shake(200, 0.01);
+                this.cameras.main.fadeOut(1000, 0, 0, 0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                    this.scene.start('crashScene');
+                })
+            }
             if(this.texturePicker == 1) {
-                this.debris01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width-50), -100, 'bicAsteroid').setOrigin(0.5,0.5);
+                this.debris01 = new Debris(this, Phaser.Math.Between(20, this.game.config.width-200), -100, 'bicAsteroid').setOrigin(0.5,0.5);
+                this.debris01.movementSpeed = 1.5;
                 this.debrisGroup.add(this.debris01);
             }
             else if(this.texturePicker == 2) {
-                this.debris01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width-50), -100, 'smolAsteroid').setOrigin(0.5,0.5);
-                this.debris01.movementSpeed = 2.5
+                this.debris01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
+                this.debris01.movementSpeed = 1;
                 this.debrisGroup.add(this.debris01);
             }
         }
         if(temp1 == true) {
             if(this.comet01.y >= game.config.height + 50) {
-                this.texturePicker = Math.floor(Math.random() * (1-1) + 1);
                 //console.log(this.texturePicker);
+                debrisCount -= 1;
                 this.comet01.destroy();
                 particles.destroy();
-                if(this.texturePicker == 1) {
-                    particles = this.add.particles('flare');
-                    particles.createEmitter({
-                        frame: 'blue',
-                        x: 0,
-                        y: 0,
-                        speed: { min: 400, max: 200 },
-                        angle: { min: -85, max: -95 },
-                        gravityY: 300,
-                        scale: { start: 0.3, end: 0, ease: 'Back.easeOut' },
-                        quantity: 1,
-                        blendMode: 'ADD',
-                    });
-                    particles.setVisible(true);
-                    particles.setPosition(this.comet01.x, this.comet01.y);
-                    this.comet01 = new Debris(this, Phaser.Math.Between(150, this.game.config.width), -100, 'cometDebris');
-                    this.comet01.movementSpeed = 3;
-                    this.cometGroup.add(this.comet01);
+                this.cameras.main.shake(200, 0.01);
+                if(debrisCount <= 0) {
+                    earthBool = true;
+                    music.stop();
+                    intro = false;
+                    //this.cameras.main.shake(200, 0.01);
+                    this.cameras.main.fadeOut(1000, 0, 0, 0);
+                    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                        this.scene.start('crashScene');
+                    })
                 }
+                particles = this.add.particles('flare');
+                particles.createEmitter({
+                    frame: 'blue',
+                    x: 0,
+                    y: 0,
+                    speed: { min: 400, max: 200 },
+                    angle: { min: -85, max: -95 },
+                    gravityY: 300,
+                    scale: { start: 0.3, end: 0, ease: 'Back.easeOut' },
+                    quantity: 1,
+                    blendMode: 'ADD',
+                });
+                particles.setVisible(true);
+                particles.setPosition(this.comet01.x, this.comet01.y);
+                this.comet01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'cometDebris');
+                this.comet01.movementSpeed = 2;
+                this.cometGroup.add(this.comet01);
             }
         }
     }
