@@ -32,6 +32,7 @@ let music;
 let startButton;
 let debrisSound;
 let idleSound;
+let goSound;
 
 var colorDebris02;
 

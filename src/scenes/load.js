@@ -34,8 +34,8 @@ class Load extends Phaser.Scene {
         this.load.audio('ship_sfx', './assets/Ship_Hum.mp3');
         this.load.audio('musicStart','./assets/Start_Tone.mp3');
         this.load.audio('debris_sfx', './assets/Asteroid_Destroyed_1.mp3');
+        this.load.audio('gameOverSound', './assets/Game_Over_Lng_Mix.mp3');
     }
-
 
     create() {
         //Then move to menu scene

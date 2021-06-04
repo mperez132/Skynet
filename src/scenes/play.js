@@ -91,7 +91,7 @@ class Play extends Phaser.Scene {
         this.debris01 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
         this.debrisGroup.add(this.debris01);
 
-        this.clock = this.time.delayedCall(8000, () => {
+        this.clock = this.time.delayedCall(10000, () => {
             this.debris02 = new Debris(this, Phaser.Math.Between(200, this.game.config.width-200), -100, 'smolAsteroid').setOrigin(0.5,0.5);
             this.debrisGroup.add(this.debris02);
             temp2 = true;

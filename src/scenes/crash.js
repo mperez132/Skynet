@@ -46,6 +46,9 @@ class Crash extends Phaser.Scene {
         this.tweenDuration = 300;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         music.stop();
+        goSound = this.sound.add('gameOverSound');
+        goSound.volume = 0.05;
+        goSound.play();
         //tileSprite temporary background
 
         //add explosion here
