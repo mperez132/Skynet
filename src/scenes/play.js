@@ -20,8 +20,12 @@ class Play extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0)
 
         debrisSound = this.sound.add('debris_sfx');
-        debrisSound.volume =0.05;
+        debrisSound.volume = 0.05;
 
+        idleSound = this.sound.add('ship_sfx');
+        idleSound.volume = 0.02;
+        idleSound.loop = true;
+        idleSound.play();
         //Canvas texture for trail.
         if(canvasBool){ 
             rt.destroy();
@@ -145,6 +149,7 @@ class Play extends Phaser.Scene {
             this.gameStatus = true;
             this.playerDraw = false;
             music.stop();
+            idleSound.stop();
             intro = false;
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -197,8 +202,9 @@ class Play extends Phaser.Scene {
 
         if(this.physics.collide(this.playerGroup, this.debrisGroup)) {
             music.stop();
+            idleSound.stop();
             this.debris01.destroy();
-            player.setAlpha(0);
+            player.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
             this.playerDraw = false;
@@ -213,8 +219,9 @@ class Play extends Phaser.Scene {
         }
         if(this.physics.collide(this.playerGroup, this.cometGroup)) {
             music.stop();
+            idleSound.stop();
             this.comet01.destroy();
-            player.setAlpha(0);
+            player.destroy()
             particles.destroy();
             this.playerAlive = false;
             this.gameStatus = true;
@@ -387,6 +394,7 @@ class Play extends Phaser.Scene {
                 if(debrisCount <= 0) {
                     earthBool = true;
                     music.stop();
+                    idleSound.stop();
                     intro = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
