@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
 
     //Allowing the player to follow the mouse cursor 
     update(time, delta) {
-        if(scoreCount >= 25) {
+        if(scoreCount >= 5) {
             music.stop();
             idleSound.stop();
             this.debris01.destroy();
@@ -387,7 +387,7 @@ class Play extends Phaser.Scene {
                     debrisCount = 3;
                     temp1 = false;
                     temp2 = false;
-                    firedBool = true;
+                    firedBool = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -422,7 +422,7 @@ class Play extends Phaser.Scene {
                 debrisCount = 3;
                 temp1 = false;
                 temp2 = false;
-                firedBool = true;
+                firedBool = false;
                 //this.cameras.main.shake(200, 0.01);
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
                 this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -458,7 +458,7 @@ class Play extends Phaser.Scene {
                     intro = false;
                     temp1 = false;
                     temp2 = false;
-                    firedBool = true;
+                    firedBool = false;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
