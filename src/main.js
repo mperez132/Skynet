@@ -49,6 +49,7 @@ var tempColor;
 var color;
 
 let PlayerMoney = 0;
+let scoreCount = 0;
 var phaser2;
 let TrailTime = 0;
 let debrisCount = 3;

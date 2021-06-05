@@ -56,12 +56,12 @@ class Crash extends Phaser.Scene {
         if(earthBool == true) {
             this.dialog = this.cache.json.get('dialogDebris');
         }
-        if (earthBool == false) {
+        if(firedBool == true) {
+            this.dialog = this.cache.json.get('dialogFired');
+        }
+        else if (earthBool == false) {
             this.dialog = this.cache.json.get('dialogCrash');
         }
-        // if(firedBool == true) {
-        //     this.dialog = this.cache.json.get('dialogFired');
-        // }
         
         // initialize dialog text objects (with no text)
         this.dialogText = this.add.bitmapText(this.TEXT_X, this.TEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);

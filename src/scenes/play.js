@@ -132,6 +132,31 @@ class Play extends Phaser.Scene {
 
     //Allowing the player to follow the mouse cursor 
     update(time, delta) {
+        if(scoreCount >= 25) {
+            music.stop();
+            idleSound.stop();
+            this.debris01.destroy();
+            if(temp2) {
+                this.debris02.destroy();
+            }
+            this.comet01.destroy();
+            particles.destroy();
+            this.playerAlive = false;
+            this.gameStatus = true;
+            this.playerDraw = false;
+            music.stop();
+            intro = false;
+            TrailTime = 0;
+            debrisCount = 3;
+            temp1 = false;
+            temp2 = false;
+            scoreCount = 0;
+            firedBool = true;
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
+                this.scene.start('crashScene');
+            })
+        }
         particles.setPosition(this.comet01.x, this.comet01.y);
         pt.clear();
         this.backgroundSpace.tilePositionY -= 1.5;
@@ -164,6 +189,7 @@ class Play extends Phaser.Scene {
                 colorDebris02.b == 0;
                 TrailTime += 1;
                 PlayerMoney += 10;
+                scoreCount += 1;
                 debrisSound.play();
                 var temp = this.debris02.getTopLeft();
                 //console.log(temp);
@@ -264,6 +290,7 @@ class Play extends Phaser.Scene {
             color.b == 0;
             TrailTime += 1;
             PlayerMoney += 10;
+            scoreCount += 1;
             debrisSound.play();
             var temp = this.debris01.getTopLeft();
             //console.log(temp);
@@ -297,6 +324,7 @@ class Play extends Phaser.Scene {
             tempColor.b = 0;
             TrailTime += 1;
             PlayerMoney += 15;
+            scoreCount += 1;
             debrisSound.play();
             var temp = this.comet01.getTopLeft();
             this.texturePicker = Math.floor(Math.random() * (3-1) + 1);
