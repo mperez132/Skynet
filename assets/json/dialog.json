@@ -2,18 +2,18 @@
 	[
 		{
 			"speaker" : "janitor",
-			"dialog" : "Another day at work protecting cities I guess....",
+			"dialog" : "Another bland shift among the stars...",
 			"newSpeaker" : "true"
 		},
 		{
 			"speaker" : "janitor",
-			"dialog" : "At least the view is beautiful. The Earth looks completely different from the pictures."
+			"dialog" : "Can't really be beat this view though... pictures just don't do it justice..."
 		}
 	],
 	[
 		{	
 			"speaker" : "boss",
-			"dialog" : "JANITOR 5-0 do you copy?",
+			"dialog" : "JANITOR 5-0, do you copy?",
 			"newSpeaker" : "true"
 		},
 		{	
@@ -23,17 +23,17 @@
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "You have multiple bogeys inbound with collision courses across California. You're the only Janitor in the area. You have the green light to intercept!",
+			"dialog" : "We have multiple bogeys on a collision course for the northern hemisphere. You're the only janitor in the area so you're on intercept duty.",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "But before you go make sure all your controls work. Try Moving your ship with the mouse cursor.",
+			"dialog" : "Before you go, let's do a quick systems check. Try moving your ship by dragging the cursor in any direction.",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "Now try moving and holding the left mouse button to create your trail. This is how you'll destroy the debris. QUICK! Destroy that comet over there!"
+			"dialog" : "Now try holding down the left mouse button while you move to deploy the Sky-Net™. This is how you'll destroy the debris. QUICK! Stop that comet over there!"
 		},
 		{	
 			"speaker" : "janitor",
@@ -42,7 +42,7 @@
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "Houston copies. Just make sure to not cause damage to the loaner starship. Good Luck out there JANITOR.",
+			"dialog" : "Copy. And be careful with that ship, company vehicles are expensive! Good luck out there.",
 			"newSpeaker" : "true"
 		}
 	]
