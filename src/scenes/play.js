@@ -117,7 +117,7 @@ class Play extends Phaser.Scene {
         //}, null, this); 
 
         //Player UI
-        this.pUI = this.add.image(0,0,'playerUI').setOrigin(0,0);
+        this.pUI = this.add.image(50,425,'playerUI').setOrigin(0,0);
         this.pUI.depth = 100;
         phaser2 = this.add.dynamicBitmapText(0, 0, 'gem_font', 'COMPENSATION: $ ' + PlayerMoney + '.00', 35);
         this.nextText = this.add.dynamicBitmapText(1100, 0, 'gem_font', 'CITIES REMAINING: ' + debrisCount, 35);
