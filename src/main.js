@@ -20,7 +20,7 @@ let config = {
             fps:60,
         }
     },
-    scene: [Load, Menu, Talking, Play, Crash, Gameover],
+    scene: [Load, Menu, Credits, Talking, Play, Crash, Gameover],
 }
 let game = new Phaser.Game(config);
 const centerX = game.config.width / 2;
