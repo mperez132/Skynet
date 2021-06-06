@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
 
     //Allowing the player to follow the mouse cursor 
     update(time, delta) {
-        if(scoreCount >= 25) {
+        if(scoreCount >= 20) {
             music.stop();
             idleSound.stop();
             this.debris01.destroy();
