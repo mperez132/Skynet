@@ -33,7 +33,11 @@
 		},
 		{	
 			"speaker" : "boss",
-			"dialog" : "Now try holding down the left mouse button while you move to deploy the Sky-Net™. This is how you'll destroy the debris. QUICK! Stop that comet over there!"
+			"dialog" : "Now try holding down the left mouse button while you move to deploy the Sky-Net™. This is how you'll destroy the debris."
+		},
+		{	
+			"speaker" : "boss",
+			"dialog" : "You'll have to be mindful though, the Sky-Net can only handle stopping two objects before it destabilizes and has to be redeployed. QUICK! Stop that comet over there!"
 		},
 		{	
 			"speaker" : "janitor",
