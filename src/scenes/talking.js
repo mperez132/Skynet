@@ -167,7 +167,7 @@ class Talking extends Phaser.Scene {
                 })
             }
         }
-            var timedEvent = this.time.delayedCall(7000, this.onEvent, [], this);
+            var timedEvent = this.time.delayedCall(15000, this.onEvent, [], this);
         }
     }
 
