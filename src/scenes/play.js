@@ -15,7 +15,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
+        scoreCount = 0;
         PlayerMoney = 0;
         startButton.volume = 0.01;
         this.cameras.main.fadeIn(1000, 0, 0, 0)
@@ -237,6 +237,7 @@ class Play extends Phaser.Scene {
             intro = false;
             TrailTime = 0;
             debrisCount = 3;
+            scoreCount = 0;
             temp1 = false;
             temp2 = false;
             //this.cameras.main.shake(200, 0.01);
@@ -259,6 +260,7 @@ class Play extends Phaser.Scene {
             intro = false;
             TrailTime = 0;
             debrisCount = 3;
+            scoreCount = 0;
             temp1 = false;
             temp2 = false;
             this.cameras.main.fadeOut(1000, 0, 0, 0);
@@ -385,6 +387,7 @@ class Play extends Phaser.Scene {
                     intro = false;
                     TrailTime = 0;
                     debrisCount = 3;
+                    scoreCount = 0;
                     temp1 = false;
                     temp2 = false;
                     firedBool = false;
@@ -423,6 +426,7 @@ class Play extends Phaser.Scene {
                 temp1 = false;
                 temp2 = false;
                 firedBool = false;
+                scoreCount = 0;
                 //this.cameras.main.shake(200, 0.01);
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
                 this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
@@ -459,6 +463,7 @@ class Play extends Phaser.Scene {
                     temp1 = false;
                     temp2 = false;
                     firedBool = false;
+                    scoreCount = 0;
                     //this.cameras.main.shake(200, 0.01);
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,(cam, effect)=> {
